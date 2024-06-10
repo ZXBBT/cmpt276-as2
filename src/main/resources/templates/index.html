@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./home.css">
+
+    <script src="./home.js" defer></script>
+
+    <title>CMPT276 A2 Home Page</title>
+
+    <script>
+        function showAlertAndRedirect(message) {
+            if (message !== 'null' && message.trim().length > 0) {
+                alert(message);
+                window.location.href = '/';
+            }
+        }
+
+        window.onload = function() {
+            const message = /*[[${message}]]*/ 'null';
+            showAlertAndRedirect(message);
+        };
+    </script>
+</head>
+
+<body>
+
+    <main>
+
+        <h1>Welcome to Rectangle Storage Web</h1>
+
+        <h2>Please select the function you want</h2>
+
+        <a href="add.html">Add</a> <br>
+
+        <a href="add.html">Edit</a> <br>
+
+        <a href="/rectangle/view">Display</a>
+
+    </main>
+
+</body>
+
+</html>

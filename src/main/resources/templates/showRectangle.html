@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+
+
+</head>
+
+
+<body>
+
+    <main class="container-fluid">
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-4">
+
+                <h1>Rectangle</h1>
+
+                <div th:style="'width:' + ${rectangle.width} + 'px; height:' + ${rectangle.height} + 'px; background-color:#' + ${rectangle.color} + ';'"></div>
+
+                <table class="table table-striped table-bordered">
+
+                    <thead>
+
+                        <tr>
+                            <th>Id</th>
+
+                            <th>Name</th>
+
+                            <th>Width</th>
+
+                            <th>Height</th>
+
+                            <th>Color</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <td id="uid" name="uid" th:text="${rectangle.uid}" value="${rectangle.uid}"></td>
+
+                        <td th:text="${rectangle.name}" id="name" style="cursor: pointer; color: blue;"></td>
+
+                        <td th:text="${rectangle.width}" id="width" style="cursor: pointer; color: blue;"></td>
+
+                        <td th:text="${rectangle.height}" id="height" style="cursor: pointer; color: blue;"></td>
+
+                        <td th:text="${rectangle.color}" id="color" style="cursor: pointer; color: blue;"></td>
+
+                    </tbody>
+
+                </table>
+                <script>
+                    var uid = document.getElementById('uid').innerText;
+                    document.getElementById('name').addEventListener('click', (event) => {
+                        openNamePopup(uid);
+                    });
+
+                    document.getElementById('width').addEventListener('click', (event) => {
+                        openWidthPopup(uid);
+                    });
+
+                    document.getElementById('height').addEventListener('click', (event) => {
+                        openHeightPopup(uid);
+                    });
+
+                    document.getElementById('color').addEventListener('click', (event) => {
+                        openColorPopup(uid);
+                    });
+
+                    function openNamePopup() {
+                        const popup = window.open('', 'popup', 'width=800,height=500');
+
+                        popup.document.write(`
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Change Rectangle Name</title>
+                                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+                            </head>
+                            <body>
+                            <div class="container-fluid">
+                            <div class="row justify-content-center">
+                            <div class="col-md-4">
+                            <h1 class="text-center mt-5 mb-4">Change Rectangle Name</h1>
+                            <form id="namePopup" action="/rectangle/update_name" method="post">
+                                <input type="hidden" id="uid" name="uid" value="${uid}">
+                                <div class="mb-3">
+                                    <input type="text" id="new_name" name="new_name" class="form-control form-control-lg" 
+                                        placeholder="name">
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <input class="btn btn-primary" type="submit" value="Submit"></input>
+                                </div>
+                            </form>
+                            
+                            </div>
+                            </div>
+                            </div>
+                        </body>
+                        </html>
+                        `);
+                        popup.focus();
+                    }
+
+                    function openWidthPopup() {
+                        const popup = window.open('', 'popup', 'width=800,height=500');
+
+                        popup.document.write(`
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Change Rectangle Width</title>
+                                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+                            </head>
+                            <body>
+                            <div class="container-fluid">
+                            <div class="row justify-content-center">
+                            <div class="col-md-4">
+                            <h1 class="text-center mt-5 mb-4">Change Rectangle Width</h1>
+                            <form id="widthPopup" action="/rectangle/update_width" method="post">
+                                <input type="hidden" id="uid" name="uid" value="${uid}">
+                                <div class="mb-3">
+                                    <input type="text" id="new_width" name="new_width" class="form-control form-control-lg" 
+                                        placeholder="width">
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <input class="btn btn-primary" type="submit" value="Submit"></input>
+                                </div>
+                            </form>
+                            
+                            </div>
+                            </div>
+                            </div>
+                        </body>
+                        </html>
+                        `);
+                        popup.focus();
+                    }
+
+                    function openHeightPopup() {
+                        const popup = window.open('', 'popup', 'width=800,height=500');
+
+                        popup.document.write(`
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Change Rectangle Height</title>
+                                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+                            </head>
+                            <body>
+                            <div class="container-fluid">
+                            <div class="row justify-content-center">
+                            <div class="col-md-4">
+                            <h1 class="text-center mt-5 mb-4">Change Rectangle Height</h1>
+                            <form id="heightPopup" action="/rectangle/update_height" method="post">
+                                <input type="hidden" id="uid" name="uid" value="${uid}">
+                                <div class="mb-3">
+                                    <input type="text" id="new_height" name="new_height" class="form-control form-control-lg" 
+                                        placeholder="height">
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <input class="btn btn-primary" type="submit" value="Submit"></input>
+                                </div>
+                            </form>
+                            
+                            </div>
+                            </div>
+                            </div>
+                        </body>
+                        </html>
+                        `);
+                        popup.focus();
+                    }
+
+                    function openColorPopup() {
+                        const popup = window.open('', 'popup', 'width=800,height=500');
+
+                        popup.document.write(`
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Change Rectangle Color</title>
+                                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+                            </head>
+                            <body>
+                            <div class="container-fluid">
+                            <div class="row justify-content-center">
+                            <div class="col-md-4">
+                            <h1 class="text-center mt-5 mb-4">Change Rectangle Color</h1>
+                            <form id="colorPopup" action="/rectangle/update_color" method="post">
+                                <input type="hidden" id="uid" name="uid" value="${uid}">
+                                <div class="mb-3">
+                                    <input type="text" id="new_color" name="new_color" class="form-control form-control-lg" 
+                                        placeholder="color">
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <input class="btn btn-primary" type="submit" value="Submit"></input>
+                                </div>
+                            </form>
+                            
+                            </div>
+                            </div>
+                            </div>
+                        </body>
+                        </html>
+                        `);
+                        popup.focus();
+                    }
+
+                    function closePopup() {
+                        document.getElementById("myPopup").style.display = "none";
+                    }
+
+                    
+                </script>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+<!-- <script>
+    function getCellIndex(td) {
+        const cells = td.parentElement.children;
+        return Array.prototype.indexOf.call(cells, td);
+    }
+
+    function makeEditable(td) {
+        if (td.classList.contains('editing')) {
+            return;
+        }
+        const originalValue = td.innerText;
+        const rowIndex = td.parentElement.rowIndex;
+        const cellIndex = getCellIndex(td);
+        td.classList.add('editing');
+        td.innerHTML = `<input type="text" value="${originalValue}" />`;
+
+        const input = td.querySelector('input');
+        input.focus();
+
+        input.addEventListener('blur', function() {
+            td.classList.remove('editing');
+            td.innerText = input.value;
+        });
+
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                td.classList.remove('editing');
+                td.innerText = input.value;
+                updateCellValue(input.value, rowIndex, cellIndex);
+            } else if (event.key === 'Escape') {
+                td.classList.remove('editing');
+                td.innerText = originalValue;
+            }
+        });
+    }
+
+    function updateCellValue(value, row, column) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/updateValue", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    alert(xhr.responseText); // Display response from the server
+                } else {
+                    alert("Error updating value in the backend");
+                }
+            }
+        };
+
+        const data = JSON.stringify({
+            newValue: value,
+            row: row,
+            column: column
+        });
+        xhr.send(data);
+    }
+
+    function initializeTable() {
+        const table = document.getElementById('myTable');
+        const cells = table.getElementsByTagName('td');
+
+        for (const cell of cells) {
+            cell.classList.add('editable');
+            cell.addEventListener('click', function() {
+                makeEditable(cell);
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeTable);
+</script> -->
+
+</html>

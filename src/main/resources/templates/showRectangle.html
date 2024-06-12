@@ -240,8 +240,6 @@
                     function closePopup() {
                         document.getElementById("myPopup").style.display = "none";
                     }
-
-                    
                 </script>
 
             </div>
@@ -251,79 +249,5 @@
     </main>
 
 </body>
-
-<!-- <script>
-    function getCellIndex(td) {
-        const cells = td.parentElement.children;
-        return Array.prototype.indexOf.call(cells, td);
-    }
-
-    function makeEditable(td) {
-        if (td.classList.contains('editing')) {
-            return;
-        }
-        const originalValue = td.innerText;
-        const rowIndex = td.parentElement.rowIndex;
-        const cellIndex = getCellIndex(td);
-        td.classList.add('editing');
-        td.innerHTML = `<input type="text" value="${originalValue}" />`;
-
-        const input = td.querySelector('input');
-        input.focus();
-
-        input.addEventListener('blur', function() {
-            td.classList.remove('editing');
-            td.innerText = input.value;
-        });
-
-        input.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                td.classList.remove('editing');
-                td.innerText = input.value;
-                updateCellValue(input.value, rowIndex, cellIndex);
-            } else if (event.key === 'Escape') {
-                td.classList.remove('editing');
-                td.innerText = originalValue;
-            }
-        });
-    }
-
-    function updateCellValue(value, row, column) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/updateValue", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    alert(xhr.responseText); // Display response from the server
-                } else {
-                    alert("Error updating value in the backend");
-                }
-            }
-        };
-
-        const data = JSON.stringify({
-            newValue: value,
-            row: row,
-            column: column
-        });
-        xhr.send(data);
-    }
-
-    function initializeTable() {
-        const table = document.getElementById('myTable');
-        const cells = table.getElementsByTagName('td');
-
-        for (const cell of cells) {
-            cell.classList.add('editable');
-            cell.addEventListener('click', function() {
-                makeEditable(cell);
-            });
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', initializeTable);
-</script> -->
 
 </html>
